@@ -1,0 +1,1081 @@
+body {
+	background-image: url(../images/background.png) ;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	background-attachment: fixed;
+	box-sizing: border-box;
+	margin: 0px;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: aliceblue;
+}
+
+a, a:visited {
+    color: aliceblue;
+    text-decoration: none;
+}
+
+main.search {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* header */
+
+header {
+    grid-area: header;
+}
+
+header #navDisplay {
+    display: none;
+}
+
+nav {
+    font-size: large;
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    "nav1"
+    "nav2";
+    position: fixed;
+    top: 0px;
+    z-index: 10;
+}
+
+#nav1 {
+    background-color: rgb(242, 230, 33);
+    z-index: 10;
+    grid-area: nav1;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3),
+        inset 0px -10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#PageLogo {
+    font-size: x-large;
+    text-shadow: 0px 0px 3px rgb(0, 0, 0);
+    margin: 10px auto 10px 10px;    
+}
+
+#search {
+    margin: auto;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 100%;
+}
+
+#search form{
+    height: auto;
+    min-height: 33px;
+    display: flex;  
+    margin: auto;  
+}
+
+#search input{
+    width: 100%;
+    padding-left: 25px;
+    border: 0px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+#search form button{
+    width: 40px;
+    font-size: x-large;
+    background-image: url("../images/searchButton.png");
+    background-size: 66%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(99, 99, 99);
+    border: 0px;
+    border-radius: 0px 10px 10px 0px;
+    color: transparent;
+}
+
+#menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 5px auto 5px auto;
+}
+
+#menu #profileIcon {
+    background-color: rgb(242, 230, 33);
+    box-shadow: inset -10px -10px 30px rgba(0, 0, 0, 0.2);
+    margin: 0px;
+    padding: 15px;
+    padding-right: 0px;
+    height: min-content;
+    color: rgb(33, 33, 33);
+    font-size: larger;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.userLogo {
+    display: flex;
+    align-items: center;
+}
+
+.userLogo img {
+    margin: auto;
+    width: 35px;
+    height: 35px;
+    border-radius: 35px;
+    background-color: rgb(11, 11, 11);    
+}
+
+#menuBar {
+    z-index: 9;
+    font-size: x-large;
+    display: none;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+#menuBar.active {
+    z-index: 9;
+    position: absolute;
+    top: 53px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+#menuBar details {
+    display: flex;
+    flex-direction: row; 
+}
+
+#menuBar details summary {
+    cursor: pointer;
+    user-select: none
+}
+
+#menuBar details ul {
+    width: 100%;
+    margin: auto;
+    margin-left: 0px;
+    user-select: none
+}
+
+.menuRoute{
+    border-top: solid black 1px;
+    padding-top: 7px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 10px;
+    background-color: rgb(242, 230, 33);
+    box-shadow: inset -10px -10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.menuRoute, .menuRoute:visited, a.managementRoute, a.managementRoute:visited {
+    color: rgb(33, 33, 33);
+}
+
+#menuBtn {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    margin: auto 10px auto 10px;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45px;
+    gap: 6px;
+}
+
+#menuBtn .menuline {
+    background-color: white;
+    display: block;
+    height: 6px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.navRoute {
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navRoute:hover, .navRoute.active {
+    color: rgb(33, 33, 33);
+    background-color: rgb(242, 230, 33);
+}
+
+.navRoute:hover img, .navRoute.active img {
+    filter: none;
+}
+
+.navRoute img {
+    width: 25px;
+    height: auto;
+    filter: invert();
+}
+
+.navRoute span {
+    display: none;
+}
+
+
+#nav2 {
+    background-color: rgb(33, 33, 33);
+    position: fixed;
+    bottom: -1px;
+    width: inherit;
+    display: flex;
+    justify-content: space-evenly;
+    grid-area: nav2;
+    z-index: 8;
+}
+
+main {
+    min-height: 100vh;
+    margin-top: 80px;
+    grid-area: main;
+}
+
+footer {
+	background-color: rgba(242, 230, 33, 0.897);
+    width: 100%;
+    height: 130px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    justify-content: space-between;
+    position: relative;
+    bottom: 0px;
+    margin-top: 30px;
+    z-index: 7;
+}
+
+footer p {
+	text-shadow: 0px 0px 5px rgba(0, 0, 0, 33%);
+	margin: 0px;
+    padding: 10px;
+}
+
+/* management */
+
+#sysManagement {
+    display: flex;
+    flex-direction: column;
+}
+
+#sysManagement p{
+    margin: auto;
+}
+
+#newGenre {
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+#newGenre fieldset button.yellowBox {
+    padding-left: 25px; 
+    padding-right: 25px; 
+    padding-top: 5px; 
+    padding-bottom: 5px;
+    font-size: large;
+    margin: auto;
+}
+
+#tracksManagement, #accountsManagement, #genresManagement {
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    width: 98%;
+}
+
+#tracksManagement tr, #accountsManagement tr{
+    height: 50px;
+}
+
+#accountsManagement {
+    width: 66%;
+}
+
+#genresManagement {
+    width: auto;    
+    display: grid;
+    justify-content: center;
+    grid-template-areas: 
+                    "titles"
+                    "genres";
+}
+
+#genresManagement p:nth-child(1){
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 4fr 1fr;
+    grid-area: titles;
+    width: 300px;
+    border: 1px solid aliceblue;
+    margin: auto;
+}
+
+#genresManagement .genres{
+    grid-area: genres;
+}
+#genresManagement .genres form{
+    display: flex;
+    gap: 0px;
+    justify-content: center;
+    margin: auto;
+    width: 300px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-left: 1px solid aliceblue;
+    border-right: 1px solid aliceblue;
+    border-bottom: 1px solid aliceblue;
+}
+#genresManagement .genres form p{
+    margin: auto 10px;
+}
+#genresManagement .genres form input, #genresManagement .genres form a{
+    margin: auto;
+}
+
+#tracksManagement, #tracksManagement th, #tracksManagement td, #accountsManagement, #accountsManagement th, #accountsManagement td{
+    border: 1px solid aliceblue;
+    border-collapse: collapse;
+}
+
+caption {
+    margin-bottom: 5px;
+}
+
+/* about */
+
+.account {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    width: fit-content;
+    box-shadow: 0px 0px 20px 1px rgba(33, 33, 33, 0.6);
+    border-radius: 15px;
+}
+
+.account .userCard {
+    margin: 0px;    
+}
+
+.userCard {
+    margin: auto auto 10px auto;
+	background-color: rgb(11, 11, 11);
+	border-radius: 15px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 350px;
+    height: 150px;
+    align-items: center;
+    z-index: 5;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+.userCard div {
+    width: 100%;
+}
+
+.userCard div details summary {    
+    float: right;    
+    background-image: url(images/editProfilePhotoButton.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+}
+
+.userCard .userLogo img {
+    margin-right: 25px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    background-color: rgb(33, 33, 33);    
+}
+
+.userCard ul {
+    margin: 10px auto 10px 15px;
+    padding-left: 0px;
+    list-style: none;
+}
+
+.userCard ul li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#profileManagement {
+    color:rgba(255, 255, 255, 0);   
+	background-image: url("../images/configButton.png");
+	background-position: 80% 50%;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-color: rgb(201, 201, 201);
+    filter: invert();
+    border: 0px;
+    border-radius: 0px 15px 15px 0px;
+    margin-left: -20px;
+    padding-left: 20px;
+    height: inherit;
+}
+
+#accountManager {
+    max-width: 95%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    min-height: 420px;
+}
+
+#accountManager ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    border-radius: 10px 0px 0px 10px;
+    
+}
+
+#accountManager ul li {
+    background-color: rgba(201, 201, 201, 0.6);
+    height: 100%;
+    width: 100%;
+    color: black;
+    box-shadow: 0px 0px 20px 10px rgba(201, 201, 201, 0.3) inset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(50, 50, 50);
+}
+
+#accountManager ul li.active {
+    background-color: rgba(99, 99, 99, 0.6);
+    color: aliceblue;
+    box-shadow: 0px 0px 15px 10px rgba(0,0,0,0.2) inset;
+}
+
+#accountManager ul li:first-child {
+    border-radius: 10px 0px 0px 0px;
+}
+
+#accountManager ul li:last-child {
+    border-radius: 0px 0px 0px 10px;
+}
+
+#accountManager ul li a {
+    width: 100%;
+    height: 100%;
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+}
+
+#accountManager .formContainer {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 0px 10px 10px 0px;
+    min-height: fit-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+
+.formContainer form{
+    display: grid; 
+    justify-content: center; 
+    width: 60%;
+    margin: 0px auto 0px auto;  
+    grid-template-rows: auto;
+    gap: 0px 5px;
+}
+
+.formContainer form.editProfileGeneral {
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: 
+      "name aka"
+      "genre country"
+      "pass pass"
+      "reset reset"
+      "error error"
+      "submit submit"; 
+    
+}
+
+.signup-form #profileForm {
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: 
+      "name aka"
+      "pass passConfirm"
+      "genre country"
+      "photo reset"
+      "error error"
+      "submit submit"; 
+}
+
+.login-form #profileForm {
+    grid-template-columns: 1fr;  
+    grid-template-areas: 
+      "name"
+      "pass"
+      "error"
+      "submit"; 
+}
+
+#accountManager .formContainer form.editProfileSecurity{
+    margin: auto;
+    grid-template-columns: 1fr; 
+    grid-template-areas: 
+      "pass"
+      "passNew"
+      "passConfirm"
+      "error"
+      "submit"; 
+}
+
+#accountManager .formContainer form.editProfileDelete{
+    display: flex;
+    margin: auto;
+}
+
+#accountManager .formContainer form.editProfilePhoto{
+    display: flex;
+    margin: auto;
+}
+
+form fieldset#name{
+    grid-area: name;
+}
+form fieldset#AKA{
+    grid-area: aka;
+}
+form fieldset#password{
+    grid-area: pass;
+    margin: auto;
+}
+form fieldset#passwordNew{
+    grid-area: passNew;
+}
+form fieldset#passwordConfirm{
+    grid-area: passConfirm;
+}
+form fieldset#country{
+    grid-area: country;
+}
+form fieldset#genre{
+    grid-area: genre;
+}
+fieldset#userPhoto{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    grid-area: photo;
+}
+
+fieldset#userPhoto a{
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    width: 45%;
+    background-color: rgb(236, 60, 60);
+    color: black;
+}
+.formContainer input#reset{
+    grid-area: reset;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: min-content;
+}
+
+div#errorDIV{
+    grid-area: error;
+    height: min-content;
+}
+
+#accountManager .formContainer form fieldset, div.signup-form #profileForm fieldset{
+    width: 50%;
+    min-width: 300px;
+    margin: auto;
+}
+
+#accountManager .formContainer form fieldset input, div.signup-form #profileForm fieldset input {
+    width: 97.3333%;
+}
+#accountManager .formContainer form fieldset select, div.signup-form #profileForm fieldset select {
+    width: 100%;
+}
+
+
+/* tracks */
+
+.file {
+    max-height: min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: whitesmoke;
+	color: black;
+	margin: 10px auto 10px auto;
+	border-radius: 25px;
+    width: 333px;
+    align-items: center;
+    box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.3);
+}
+
+.file audio {
+    z-index: 7;
+    width: 100%;
+}
+
+.fileTitle {
+    border-radius: 25px 25px 0px 0px;
+    background-color: whitesmoke;
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+}
+
+.file a {
+    color: black;
+}
+
+.filePhoto {
+    display: flex;
+    justify-content: center;
+    height: auto;
+    max-height: 300px;
+    width: 300px;
+}
+
+.filePhoto img {
+    height: auto;
+    width: 100%;
+    padding-left: 10px;
+	padding-right: 10px;
+    background-color: rgb(11, 11, 11);
+    border-radius: 5px;
+}
+
+.file p {
+	margin: auto;
+}
+
+.fileInfo {
+    background-color: whitesmoke;
+    margin: auto;
+}
+
+.fileInfo form {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.trackForm {
+    width: 42%;
+}
+
+.trackForm input {
+    width: 95%;
+}
+
+.trackForm select {
+    width: 100%;
+}
+
+a.deleteFile {
+    font-size: 22.2px;
+    min-width: 30px;
+    min-height: 30px;
+    width: 30px;
+    height: 30px;
+	color:rgba(255, 255, 255, 0);
+    background-color: rgb(236, 60, 60);	
+	background-image: url("../images/deleteButton.png");
+	background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    margin-left: 25px;
+}
+
+.trackForm a.deleteFile {
+    font-size: medium;
+}
+
+td a.deleteFile, td input.editFile {
+    margin: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.editFile {
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    width: 30px;
+    height: 30px;
+    color:rgba(255, 255, 255, 0);
+    background-color: rgb(242, 230, 33);	
+	background-image: url("../images/editButton.png");
+	background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    margin-right: 25px;
+}
+
+#uploadFileDIV, .login-form, .signup-form {
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: auto;
+    width: min-content;
+    height: min-content;
+    padding: 15px;
+    border-radius: 10px;
+}
+#uploadFileForm {
+    margin: auto;
+    width: max-content;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+/* genres */
+
+#genresDiv {
+    margin: auto;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    max-width: 95%;
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+.genre, .genre:visited {    
+    color: rgb(33, 33, 33);
+    background-color: rgba(242, 230, 33, 0.95);    
+    border-radius: 10px;
+    min-height: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.genre:hover {
+    color: aliceblue;
+    background-color: rgb(33, 33, 33);    
+}
+
+/* home */
+
+#userStories {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 10px;
+    width: 98%;
+    margin: auto;
+    max-width: 100%;
+    margin-top: -10px;
+    padding-bottom: 10px;
+}
+
+#userStories::-webkit-scrollbar {
+    width: 10px;
+}
+#userStories::-webkit-scrollbar-track {
+    background: rgb(99, 99, 99); 
+}
+#userStories::-webkit-scrollbar-thumb {
+    background: rgb(66, 66, 66); 
+}
+#userStories::-webkit-scrollbar-thumb:hover {
+    background: rgb(33, 33, 33); 
+}
+
+#userStories img{ 
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    scroll-snap-align: start;
+}
+
+/*  */
+
+.submitdiv {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+    margin: auto;
+    gap: 10px;
+    grid-area: submit;
+}
+
+.submitdiv section:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+}
+
+.captcha {
+    display: flex;
+    width:min-content;
+    margin: 5px auto;
+}
+
+#captcha {
+	resize: none;	
+	text-decoration: line-through;
+	font-family: Segoe UI, Frutiger, Helvetica, Arial, sans-serif;
+	font-size: x-large;
+	background-color: rgb(242, 230, 33);
+	color: rgb(22, 22, 22);
+	margin: auto;
+	padding: 4px 0px 4px 0px;
+	border-radius: 15px;
+	user-select: none;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+}
+
+#reCaptcha {
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    border-color: transparent;
+    background-image: url("../images/reloadButton.png");    
+    background-size: 100%;
+    background-repeat: no-repeat;
+	background-color: rgb(242, 230, 33);	
+}
+
+#reCaptcha:hover {
+    transition: transform 0.3s;
+    transform: rotate(50deg);
+}
+
+.yellowBox {
+    margin: auto;
+    margin-top: 10px;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: larger;
+	background-color: rgb(242, 230, 33);
+	border-color: transparent;
+    cursor: pointer;
+}
+
+#errorDIV {
+    text-align: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: 5px auto;
+    max-width: 200px;
+}
+
+#errorDIV.active {
+    background-color: rgb(236, 60, 60);
+    color: black;
+    border-radius: 10px; 
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    header {
+        width: 10vw;
+        position: fixed;
+        top: 0px;
+    }
+
+    header.active {
+        width: 20vw;
+    }
+
+    header #navDisplay {
+        position: relative;
+        right: -142px;
+        top: -80vh;
+        width: min-content;
+        z-index: 5;
+        background-color: rgba(99, 99, 99, 0.5);
+        border: 0px;
+        border-radius: 0px 50px 50px 0px;
+        display: flex;
+    }
+
+    header #navDisplay img {
+        margin: auto;
+        width: 15px;
+        height: auto;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 10px;
+        padding-right: 0px;
+    }
+
+    header.active #navDisplay {       
+        right: -260px;
+    }
+
+    header.active #navDisplay img {
+        margin: auto;
+        width: 15px;
+        height: auto;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 5px;
+        padding-right: 10px;
+        transform: scaleX(-1);
+    }    
+
+    nav {
+        position: absolute;
+        width: min-content;
+        height: 100%;
+        box-shadow: 10px 0px 80px 20px rgba(33, 33, 33, 0.3);
+    }
+
+    header.active nav {
+        width: 20%;  
+    }
+
+    #nav1 {
+        width: min-content;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1.5fr 1fr 1fr;
+    }
+
+    header nav #nav1 div#search {
+        width: 85%;
+    }
+
+    nav #nav1 div#search input {
+        padding-left: 15px;
+    }
+
+    header.active nav #nav1 div#search {
+        width: max-content;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    header nav #nav1 div#menu button {
+        display: none;
+    }
+
+    header.active nav #nav1 div#menu button{
+        display: flex;
+    }
+
+    #PageLogo {
+        font-size: xx-large;
+        margin: 10px 20px 10px 20px;
+    }
+    
+    #nav2 {
+        position: static;
+        width: auto;
+        bottom: 0px;
+        display: block;
+        height: 100vh;
+    }
+
+    header nav #nav2 .navRoute {
+        gap: 5px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }   
+
+    header nav #nav2 .navRoute span {
+        display: none;
+    }   
+
+    header.active nav #nav2 .navRoute span {
+        display: block;
+        
+    }   
+
+    #menuBar a, #menuBar details {
+        text-align: center;
+    }
+
+    #menuBar details ul {
+        width: auto;
+    }
+
+    #menuBar.active {
+        width: min-content;
+        top: 147px;
+        left: 76px;
+    }
+
+    main {
+        width: auto;
+        margin: 25px 5px auto 20%;
+    }
+
+    #userStories {
+        z-index: 10;
+    }
+
+    #genresDiv {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    footer {
+        z-index: -1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 180px;
+        height: min-content;
+    }
+}
+
+/* pc */
+@media only screen and (min-width: 992px) {
+    body {
+        font-size: 16px;
+    }
+
+    #genresDiv {
+        grid-template-columns: repeat(5, 1fr);
+    }    
+
+    .user-data {
+        display: flex;
+        flex-direction: column;
+        width: min-content;
+        margin: auto;
+    }
+}
+
+.hidden {
+    display: none !important; 
+}
