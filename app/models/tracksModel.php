@@ -8,17 +8,27 @@ class tracksModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=wewavdb;charset=utf8', 'root', '');
     }
 
-    public function getAll($order, $desc) {
-        if ($desc) {
-            $query = $this->db->prepare("SELECT * FROM tracks 
-                                        INNER JOIN accounts ON tracks.user_id = accounts.id
-                                         ORDER BY $order DESC");                       
+    public function getAll($order, $desc, $pagination, $field, $req) {
+        
+        if ($desc==true) {
+            $query = $this->db->prepare("SELECT t.id, t.name, g.genre, t.date, t.photo_dir, a.name AS user_name, a.AKA 
+                                        FROM tracks t
+                                        INNER JOIN accounts a ON t.user_id = a.id
+                                        INNER JOIN genres g ON t.genre_id = g.id                                        
+                                        WHERE $field LIKE ?
+                                        ORDER BY $order DESC 
+                                        $pagination ");                       
         } else {
-            $query = $this->db->prepare("SELECT * FROM tracks 
-                                        INNER JOIN accounts ON tracks.user_id = accounts.id
-                                         ORDER BY $order ASC"); 
+            $query = $this->db->prepare("SELECT t.*, a.name as user_name, g.genre 
+                                        FROM tracks t 
+                                        INNER JOIN accounts a ON a.id = t.user_id 
+                                        INNER JOIN genres g ON g.id = t.genre_id                                        
+                                        WHERE $field LIKE ?
+                                        ORDER BY $order DESC 
+                                        $pagination");  
         }
-        $query->execute();
+
+        $query->execute([$req]);
         $tracks = $query->fetchAll(PDO::FETCH_OBJ); 
 
         return $tracks;

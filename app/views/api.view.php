@@ -34,14 +34,8 @@ class tracksView extends ApiView{
         $this->smarty = new Smarty();
     }
 
-    public function showTracks($tracks, $user) {
+    public function showTracks($tracks) {
       
-      require_once './app/models/genresModel.php';
-      $genresModel = new genresModel();
-      $genres = $genresModel->getGenres();
-      
-        $this->smarty->assign('user', $user); 
-        $this->smarty->assign('genres', $genres);  
         $this->smarty->assign('tracks', $tracks);    
         $this->smarty->display('tracks.tpl');
     }

@@ -1,9 +1,21 @@
-# API REST para el recurso de tareas
-Una API REST sencilla para manejar un CRUD de tareas
+an API REST to manage a CRUD of a upload music page
 
-## Importar la base de datos
-- importar desde PHPMyAdmin (o cualquiera) database/db_tasks.php
+DB=> import from "database/db"
 
+ENDPOINTS=> http://localhost/*local_folder*/WeWavAPI/api/*table*/
+    (tables= tracks, accounts, genres, countries)
 
-## Pueba con postman
-El endpoint de la API es: http://localhost/tucarpetalocal/todolist-rest/api/tasks
+QUERY PARAMS=> 
+    order= sort by field (column in the table DB) // string
+
+    desc= if it exists, sort descending, else sort ascending
+
+    limit & page // int
+    
+    filter= filter for field (column in the table DB)-> "TABLE ABBR"."FIELD":"QUERY" (for example "t.name:a" or "a.id:1")
+
+TABLES ABBR=> 
+            "t" for tracks
+            "a" for accounts
+            "g" for genres
+            "c" for countries

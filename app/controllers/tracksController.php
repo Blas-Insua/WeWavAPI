@@ -3,9 +3,7 @@ require_once './app/controllers/apiController.php';
 
 class tracksController extends ApiController {
 
-    private $user = [{
-        "rol": 3;
-    }];
+    
 
     private function getData() {
         return json_decode($this->data);
@@ -42,12 +40,30 @@ class tracksController extends ApiController {
         } else {
             $desc = false;
         }
-        $tracks = $this->tracksModel->getAll($order, $desc);
-        $profile = $this->authApiHelper->authToken();
-        $user = $this->accountsModel->search($profile);
+        if (isset($_GET["limit"]) && (gettype($_GET["limit"])=="integer")) {
+            $pagination = "LIMIT ".$_GET["limit"];
+            if ((isset($_GET["page"])) && (gettype($_GET["page"])=="integer")) {
+                $pagination = $pagination." OFFSET ".(($_GET["page"]-1)*$_GET["limit"]);
+            }
+        } else {
+            $pagination = '';
+        }
+        if (isset($_GET["filter"])) {
+            $filter = explode(":", $_GET["filter"]);
+            $field = $filter[0];
+            $req = $filter[1]."%";
+        } else {
+            $field = 1;
+            $req = 1;
+        }
 
-        $this->view->response($tracks);
-        $this->tracksView->showTracks($tracks, $user);
+        $tracks = $this->tracksModel->getAll($order, $desc, $pagination, $field, $req);
+
+        if ($tracks!=null) {
+            $this->view->response($tracks);
+        } else {
+            $this->view->response("Not founded :(", 404);
+        }
     }
 
     public function get($params = null) {

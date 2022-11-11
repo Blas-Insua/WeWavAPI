@@ -2,7 +2,7 @@
     {foreach from=$tracks item=$track}
         <div class="file">
             <div class="fileTitle">
-                <p><a href='about/{$track->userName}'>{$track->userName}</a></p>
+                <p><a href='about/{$track->user_name}'>{$track->user_name}</a></p>
                 <p>{$track->name}</p>
             </div>
             
