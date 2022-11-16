@@ -24,10 +24,12 @@ class authApiHelper {
         return $payload;
     }
 
-    function authToken(){
+    function getAuth(){
         $payload = $this->getToken();
-        var_dump($payload);
-        return $payload;
+        if(isset($payload->id))
+            return $payload;
+        else
+            return array();
     }
 
     function getAuthHeader(){

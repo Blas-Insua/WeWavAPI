@@ -8,10 +8,9 @@ class tracksModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=wewavdb;charset=utf8', 'root', '');
     }
 
-    public function getAll($order, $desc, $pagination, $field, $req) {
-        
+    public function getAll($order, $desc, $pagination, $field, $req) {        
         if ($desc==true) {
-            $query = $this->db->prepare("SELECT t.id, t.name, g.genre, t.date, t.photo_dir, a.name AS user_name, a.AKA 
+            $query = $this->db->prepare("SELECT t.*, a.name AS user_name, a.AKA AS user_AKA, g.genre  
                                         FROM tracks t
                                         INNER JOIN accounts a ON t.user_id = a.id
                                         INNER JOIN genres g ON t.genre_id = g.id                                        
@@ -19,12 +18,12 @@ class tracksModel {
                                         ORDER BY $order DESC 
                                         $pagination ");                       
         } else {
-            $query = $this->db->prepare("SELECT t.*, a.name as user_name, g.genre 
-                                        FROM tracks t 
-                                        INNER JOIN accounts a ON a.id = t.user_id 
-                                        INNER JOIN genres g ON g.id = t.genre_id                                        
+            $query = $this->db->prepare("SELECT t.*, a.name AS user_name, a.AKA AS user_AKA, g.genre  
+                                        FROM tracks t
+                                        INNER JOIN accounts a ON t.user_id = a.id
+                                        INNER JOIN genres g ON t.genre_id = g.id                                        
                                         WHERE $field LIKE ?
-                                        ORDER BY $order DESC 
+                                        ORDER BY $order ASC 
                                         $pagination");  
         }
 
@@ -35,7 +34,11 @@ class tracksModel {
     }
 
     public function get($id) {
-        $query = $this->db->prepare("SELECT * FROM tracks WHERE id = ?");
+        $query = $this->db->prepare("SELECT t.*, a.name AS user_name, a.AKA AS user_AKA, g.genre  
+                                    FROM tracks t
+                                    INNER JOIN accounts a ON t.user_id = a.id
+                                    INNER JOIN genres g ON t.genre_id = g.id                                        
+                                    WHERE t.id = ?");
         $query->execute([$id]);
         $tracks = $query->fetch(PDO::FETCH_OBJ);
         

@@ -1,3 +1,4 @@
+{include file="header.tpl" }
 <div id="tracksList">
     {foreach from=$tracks item=$track}
         <div class="file">

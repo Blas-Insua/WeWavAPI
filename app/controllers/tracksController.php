@@ -3,12 +3,6 @@ require_once './app/controllers/apiController.php';
 
 class tracksController extends ApiController {
 
-    
-
-    private function getData() {
-        return json_decode($this->data);
-    }
-
     public function getAll($params = null) {  
         if (isset($_GET["order"])) {
             switch ($_GET["order"]) {
@@ -40,11 +34,13 @@ class tracksController extends ApiController {
         } else {
             $desc = false;
         }
-        if (isset($_GET["limit"]) && (gettype($_GET["limit"])=="integer")) {
-            $pagination = "LIMIT ".$_GET["limit"];
-            if ((isset($_GET["page"])) && (gettype($_GET["page"])=="integer")) {
-                $pagination = $pagination." OFFSET ".(($_GET["page"]-1)*$_GET["limit"]);
-            }
+        if (isset($_GET["limit"])) {
+            $limit = $_GET["limit"];
+            $pagination = "LIMIT ".$limit;
+            if (isset($_GET["page"]) && !empty($_GET["page"])) {
+                $page = $_GET["page"];
+                $pagination = $pagination." OFFSET ".(($page-1)*$limit);                
+            }            
         } else {
             $pagination = '';
         }
@@ -56,13 +52,13 @@ class tracksController extends ApiController {
             $field = 1;
             $req = 1;
         }
-
         $tracks = $this->tracksModel->getAll($order, $desc, $pagination, $field, $req);
 
-        if ($tracks!=null) {
+        if ($tracks!=null) {            
             $this->view->response($tracks);
+            // $this->tracksView->showTracks($tracks);
         } else {
-            $this->view->response("Not founded :(", 404);
+            $this->view->response("Not found tracks :(", 404);
         }
     }
 
@@ -77,24 +73,49 @@ class tracksController extends ApiController {
     }
 
     public function delete($params = null) { 
+
         $id = $params[':ID'];
+        
+        $account = $this->authHelper->getAuth();
+
+        if (!$account) {
+            $this->view->response("Bad Request", 400);
+            return;
+        }
 
         $track = $this->tracksModel->get($id);
-        if ($track) {
-            $this->tracksModel->delete($id);
-            $this->view->response($track);
-        } else 
-            $this->view->response("The track with id= '$id' don't exists", 404);
+
+        if ($track->user_id==$account->id || ($account->rol==0 || $account->rol==1)) {
+            if ($track) {            
+                $this->tracksModel->delete($id);
+                $this->view->response($track);
+            } else 
+                $this->view->response("The track with id= '$id' don't exists", 404);
+        } else {
+            $this->view->response("Don't authorized", 403);
+            return;
+        }        
     }
 
     public function upload() {
 
+        $account = $this->authHelper->getAuth();
+
+        if (!$account) {
+            $this->view->response("You must be logged to post a file", 401);
+            return;
+        }
+
         $track = $this->getData();
+
+        if (!isset($track->genre_id)) {
+            $track->genre_id = 0;
+        }
 
         if (empty($track->name)) {
             $this->view->response("Please set a name", 400);
         } else {
-            $id = $this->tracksModel->upload($track->name, 0, $track->genre_id, $track->date);
+            $id = $this->tracksModel->upload($track->name, $account->id, $track->genre_id, $track->date);
             $track = $this->tracksModel->get($id);
             $this->view->response($track, 201);
         }

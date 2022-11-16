@@ -7,10 +7,6 @@ function base64url_encode($data) {
 
 class authApiController extends apiController {
 
-    private function getData() {
-        return json_decode($this->data);
-    }
-
     public function getToken($params = null) {
         // Obtener "Basic base64(user:pass)
         $basic = $this->authHelper->getAuthHeader();
@@ -43,7 +39,7 @@ class authApiController extends apiController {
                     'id' => $account->id,
                     'name' => $account->name,
                     'rol' => $account->rol_id,
-                    'exp' => time()+(0 * 00 * 15 * 00)
+                    'exp' => time()+(60*60)
                 );
                 $header = base64url_encode(json_encode($header));
                 $payload = base64url_encode(json_encode($payload));

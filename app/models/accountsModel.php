@@ -8,16 +8,40 @@ class accountsModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=wewavdb;charset=utf8', 'root', '');
     }
 
-    public function getAll() {
-        $query = $this->db->prepare("SELECT * FROM accounts");
-        $query->execute();
-        $accounts = $query->fetchAll(PDO::FETCH_OBJ);
-        
+    public function getAll($order, $desc, $pagination, $field, $req) {
+        if ($desc==true) {
+            $query = $this->db->prepare("SELECT a.*, c.country, g.genre, r.rol
+                                        FROM accounts a
+                                        INNER JOIN countries c ON a.country_id = c.id
+                                        INNER JOIN genres g ON a.genre_id = g.id                                        
+                                        INNER JOIN roles r ON a.rol_id = r.id                                        
+                                        WHERE $field LIKE ?
+                                        ORDER BY $order DESC 
+                                        $pagination ");                       
+        } else {
+            $query = $this->db->prepare("SELECT a.*, c.country, g.genre, r.rol
+                                        FROM accounts a
+                                        INNER JOIN countries c ON a.country_id = c.id
+                                        INNER JOIN genres g ON a.genre_id = g.id                                        
+                                        INNER JOIN roles r ON a.rol_id = r.id                                        
+                                        WHERE $field LIKE ?
+                                        ORDER BY $order ASC 
+                                        $pagination");  
+        }
+
+        $query->execute([$req]);
+        $accounts = $query->fetchAll(PDO::FETCH_OBJ); 
+
         return $accounts;
     }
 
     public function get($id) {
-        $query = $this->db->prepare("SELECT * FROM accounts WHERE id = ?");
+        $query = $this->db->prepare("SELECT a.*, c.country, g.genre, r.rol 
+                                    FROM accounts a
+                                    INNER JOIN countries c ON a.country_id = c.id
+                                    INNER JOIN genres g ON a.genre_id = g.id                                        
+                                    INNER JOIN roles r ON a.rol_id = r.id   
+                                    WHERE a.id = ?");
         $query->execute([$id]);
         $account = $query->fetch(PDO::FETCH_OBJ);
         
@@ -25,7 +49,12 @@ class accountsModel {
     }
 
     public function search($param) {
-        $query = $this->db->prepare("SELECT * FROM accounts WHERE name = ? OR AKA = ?");
+        $query = $this->db->prepare("SELECT a.*, c.country, g.genre, r.rol 
+                                    FROM accounts a
+                                    INNER JOIN countries c ON a.country_id = c.id
+                                    INNER JOIN genres g ON a.genre_id = g.id                                        
+                                    INNER JOIN roles r ON a.rol_id = r.id 
+                                    WHERE a.name = ? OR a.AKA = ?");
         $query->execute([$param, $param]);
         $account = $query->fetch(PDO::FETCH_OBJ);
         
@@ -33,6 +62,7 @@ class accountsModel {
     }
 
     public function create($name, $AKA, $password, $genre_id, $country_id) {
+
         $query = $this->db->prepare("INSERT INTO accounts (name, AKA, password, genre_id, country_id) VALUES (?, ?, ?, ?, ?)");
         $query->execute([$name, $AKA, $password, $genre_id, $country_id]);
 

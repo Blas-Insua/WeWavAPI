@@ -26,29 +26,3 @@ class ApiView {
 }
 
 require_once './libs/smarty-4.2.1/libs/Smarty.class.php';
-
-class tracksView extends ApiView{
-    private $smarty;
-
-    public function __construct() {
-        $this->smarty = new Smarty();
-    }
-
-    public function showTracks($tracks) {
-      
-        $this->smarty->assign('tracks', $tracks);    
-        $this->smarty->display('tracks.tpl');
-    }
-
-    public function showTracksErr($genre) {   
-        $this->smarty->assign('genre', $genre);    
-        $this->smarty->display('tracksErr.tpl');
-    }
-
-    public function showUploadSection($genres) {
-        $this->smarty->assign('genres', $genres);  
-        $this->smarty->display('upload.tpl');
-    }
-
-    
-}

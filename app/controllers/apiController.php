@@ -23,8 +23,8 @@ class ApiController {
         $this->data = file_get_contents("php://input");
     }
 
-    function base64url_encode($data) {
-        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    public function getData() {
+        return json_decode($this->data);
     }
 }
 

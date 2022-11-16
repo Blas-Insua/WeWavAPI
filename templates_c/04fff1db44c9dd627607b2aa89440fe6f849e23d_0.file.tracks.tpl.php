@@ -1,27 +1,30 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-11-11 20:28:03
+/* Smarty version 4.2.1, created on 2022-11-12 03:31:28
   from 'D:\Programs\XAMPP\htdocs\WeWavRest\templates\tracks.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_636ea2439408d7_49255748',
+  'unifunc' => 'content_636f058021c878_08751666',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '04fff1db44c9dd627607b2aa89440fe6f849e23d' => 
     array (
       0 => 'D:\\Programs\\XAMPP\\htdocs\\WeWavRest\\templates\\tracks.tpl',
-      1 => 1668194882,
+      1 => 1668220286,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:header.tpl' => 1,
   ),
 ),false)) {
-function content_636ea2439408d7_49255748 (Smarty_Internal_Template $_smarty_tpl) {
-?><div id="tracksList">
+function content_636f058021c878_08751666 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+<div id="tracksList">
     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['tracks']->value, 'track');
 $_smarty_tpl->tpl_vars['track']->do_else = true;
